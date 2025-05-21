@@ -14,7 +14,7 @@ const app=express();
 //To make input as json
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({origin:["http://localhost:5173"],credentials:true}));     // or app.use(cors());
+app.use(cors({origin:["https://notes-application-1-ec0i.onrender.com"],credentials:true}));     // or app.use(cors());
 
 mongoose.connect(process.env.Mongo_url).then(()=>{
     console.log("Database is connected");
