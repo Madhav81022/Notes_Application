@@ -44,7 +44,7 @@ const Navbar = ({userInfo,onSearchNote,handleClearSearch}) => {
        try{
            dispatch(signoutStart())
 
-           const res = await axios.get("http://localhost:3000/api/auth/signout",{withCredentials:true})
+           const res = await axios.get("https://notes-application-3emx.onrender.com/api/auth/signout",{withCredentials:true})
        
            if(res.data.success === false)
            {
@@ -84,7 +84,7 @@ const Navbar = ({userInfo,onSearchNote,handleClearSearch}) => {
       </Link>
        
        <Link to={"/imp_note"}>
-       <button className="text-sm bg-red-500 p-1  rounded-md text-white hover:opacity-80 hidden md:inline-block" >Imp Notes</button>
+       <button className="text-sm bg-red-500 p-1  rounded-md text-white hover:opacity-80 hidden md:inline-block" >Favorite Notes</button>
        </Link>
        </div>
 
@@ -164,7 +164,7 @@ const Navbar = ({userInfo,onSearchNote,handleClearSearch}) => {
             </Link>
 
             <Link to="/imp_note" className=" text-base text-blue-500 hover:underline " onClick={()=> setIsSidebarOpen(false)}>
-              Imp Notes
+              Favorite Notes
             </Link>
 
             </div>

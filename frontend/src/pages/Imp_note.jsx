@@ -57,7 +57,7 @@ const Imp_note = () => {
         const noteId = noteData._id;
       
         try {
-          const res = await axios.put("http://localhost:3000/api/note/fav-note/"+noteId,
+          const res = await axios.put("https://notes-application-3emx.onrender.com/api/note/fav-note/"+noteId,
             {isFav: !noteData.isFav},
             {withCredentials:true}
           )
@@ -80,7 +80,7 @@ const Imp_note = () => {
       
     const getAllNotes = async()=>{
         try{
-          const res= await axios.get("http://localhost:3000/api/note/fav-notes",
+          const res= await axios.get("https://notes-application-3emx.onrender.com/api/note/fav-notes",
             {withCredentials:true,}
           )
           

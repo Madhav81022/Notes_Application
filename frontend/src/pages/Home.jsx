@@ -55,8 +55,8 @@ const Home = () => {
 //get all notes -> To call api
 const getAllNotes = async()=>{
   try{
-    const res= await axios.get("http://localhost:3000/api/note/all",
-      {withCredentials:true,}
+    const res= await axios.get("https://notes-application-3emx.onrender.com/api/note/all",
+      {withCredentials:true}
     )
     
     if(res.data.success === false)
@@ -94,7 +94,7 @@ const deleteNote = async(data) =>{
   const noteId = data._id
 
   try {
-    const res= await axios.delete("http://localhost:3000/api/note/delete/" + noteId,
+    const res= await axios.delete("https://notes-application-3emx.onrender.com/api/note/delete/" + noteId,
       {withCredentials:true}
     )
 
@@ -115,7 +115,7 @@ const deleteNote = async(data) =>{
 
 const onSearchNote= async (query)=>{
   try {
-    const res = await axios.get("http://localhost:3000/api/note/search",
+    const res = await axios.get("https://notes-application-3emx.onrender.com/api/note/search",
       {params:{query},
     withCredentials:true,
     })
@@ -145,7 +145,7 @@ const updateIsPinned = async(noteData)=>{
   const noteId = noteData._id;
 
   try {
-    const res = await axios.put("http://localhost:3000/api/note/update-note-pinned/"+noteId,
+    const res = await axios.put("https://notes-application-3emx.onrender.com/api/note/update-note-pinned/"+noteId,
       {isPinned: !noteData.isPinned},
       {withCredentials:true}
     )
@@ -169,7 +169,7 @@ const updateIsFav = async(noteData)=>{
   const noteId = noteData._id;
 
   try {
-    const res = await axios.put("http://localhost:3000/api/note/fav-note/"+noteId,
+    const res = await axios.put("https://notes-application-3emx.onrender.com/api/note/fav-note/"+noteId,
       {isFav: !noteData.isFav},
       {withCredentials:true}
     )

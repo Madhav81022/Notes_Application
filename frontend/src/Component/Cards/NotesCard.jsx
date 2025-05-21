@@ -24,6 +24,7 @@ const NotesCard = ({title,date,content,tags,isPinned,onPinNote,onEdit,onDelete,o
         </div>
       
         <div className="flex items-center gap-2">
+        <div className="relative group">
         <MdOutlinePushPin
               className={`icon-btn ${ isPinned ? "text-[#2B85FF]" : "text-slate-300"
             }`}
@@ -32,14 +33,24 @@ const NotesCard = ({title,date,content,tags,isPinned,onPinNote,onEdit,onDelete,o
             onPinNote()
            }} 
          />
+            {/* Tooltip */}
+             <span className={`absolute -bottom-8 left-1/2 transform -translate-x-1/2 px-2 py-1 text-xs ${theme === 'dark' ? 'bg-gray-600 text-white border-white' : 'bg-gray-200 text-gray-800 border-gray-900'} text-white rounded-md border border-white opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200`}>
+              Pin
+            </span>
+          </div>
+
+          <div className="relative group">
          <button onClick={(e)=>{
           e.stopPropagation();
           onFavNote();
          }}>
            {isFav?<FaHeart className=" text-red-600"/>:<CiHeart/>}
          </button>
-         
-          
+         {/* Tooltip */}
+         <span className={`absolute -bottom-8 left-1/2 transform -translate-x-1/2 px-2 py-1 text-xs ${theme === 'dark' ? 'bg-gray-600 text-white border-white' : 'bg-gray-200 text-gray-800 border-gray-900'} text-white rounded-md border border-white opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200`}>
+         {isFav ? "Favorite" : "Unfavorite"}
+            </span>
+          </div>
         </div>
        
       </div>  
@@ -53,6 +64,7 @@ const NotesCard = ({title,date,content,tags,isPinned,onPinNote,onEdit,onDelete,o
         </div>
 
         <div className="flex items-center gap-2">
+        <div className="relative group">
           <MdCreate
             className="icon-btn hover:text-green-600"
             onClick={
@@ -61,6 +73,13 @@ const NotesCard = ({title,date,content,tags,isPinned,onPinNote,onEdit,onDelete,o
           onEdit();}}
           />
 
+          {/* Tooltip */}
+          <span className={`absolute -bottom-8 left-1/2 transform -translate-x-1/2 px-2 py-1 text-xs ${theme === 'dark' ? 'bg-gray-600 text-white border-white' : 'bg-gray-200 text-gray-800 border-gray-900'} text-white rounded-md border border-white opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200`}>
+              Edit
+            </span>
+          </div>
+
+          <div className="relative group">
           <MdDelete
             className="icon-btn hover:text-red-500"
             onClick={
@@ -68,6 +87,12 @@ const NotesCard = ({title,date,content,tags,isPinned,onPinNote,onEdit,onDelete,o
                 e.stopPropagation();
               onDelete();}}
           />
+
+          {/* Tooltip */}
+          <span className={`absolute -bottom-8 left-1/2 transform -translate-x-1/2 px-2 py-1 text-xs ${theme === 'dark' ? 'bg-gray-600 text-white border-white' : 'bg-gray-200 text-gray-800 border-gray-900'} text-white rounded-md border border-white opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200`}>
+              Delete
+            </span>
+          </div>
         </div>
       </div> 
 
