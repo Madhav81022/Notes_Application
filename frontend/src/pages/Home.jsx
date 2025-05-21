@@ -41,15 +41,15 @@ const Home = () => {
 
   useEffect(()=>{
     console.log(currentUser);
-    if(currentUser===null || !currentUser)
-    {
-      navigate("/login")
-    }
-    else{
+    // if(currentUser===null || !currentUser)
+    // {
+    //   navigate("/login")
+    // }
+    // else{
       setUserInfo(currentUser?.rest)
       getAllNotes();
       
-    }
+    //}
 },[])
 
 //get all notes -> To call api
