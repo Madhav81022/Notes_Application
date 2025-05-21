@@ -23,7 +23,7 @@ mongoose.connect(process.env.Mongo_url).then(()=>{
     console.log("Error in Databse",err);
 });
 
-const port=process.env.port || 3000;
+const port=process.env.port || 3001;
 
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}`);
