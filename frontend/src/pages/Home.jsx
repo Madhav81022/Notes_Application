@@ -15,8 +15,8 @@ import moment from "moment";
 
 const Home = () => {
 
-   const { theme } = useContext(ThemeContext);
-
+   const { theme , isAuth} = useContext(ThemeContext);
+  // const {isAuth} = useContext(ThemeContext); 
   const {currentUser,loading,errorDispatch }=useSelector(
     (state)=>state.user
   )
@@ -51,6 +51,10 @@ const Home = () => {
       
     //}
 },[])
+
+const handleLogin=()=>{
+  navigate('/login');
+}
 
 //get all notes -> To call api
 const getAllNotes = async()=>{
@@ -228,10 +232,11 @@ console.log(allNotes)
 
      message={isSearch ? "Oops! No Notes found matching your search":`Ready to capture your ideas? CLick the 'Add' button to start noting down your thoughts, inspiration and remembers. Let's get started!`}/>}
     </div>
+    
     <button className=" fixed w-16 h-16 flex items-center justify-center rounded-2xl bg-[#2B85FF] hover:bg-blue-600  right-10 bottom-10"
-    onClick={()=>{
+    onClick={isAuth?()=>{
       setOpenAddEditModel({isShown:true,type:"add",data:null })
-    }}
+    }: handleLogin}
     >
     <MdAdd className="text-[32px] text-white" />
     </button>

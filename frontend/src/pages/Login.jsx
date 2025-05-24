@@ -8,10 +8,12 @@ import { signInFailure, signInState, signInSuccess } from "../redux/user/userSli
 import { toast } from "react-toastify";
 import { ThemeContext } from "../contexts/theme";
 import { useContext } from "react";
-
+//import { useContext } from 'react';
+//import { ThemeContext } from '../contexts/theme';
 const Login = () => {
 
   const {theme} = useContext(ThemeContext);
+  const { setIsAuth } = useContext(ThemeContext);
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
   const [error,setError] = useState("");
@@ -51,7 +53,8 @@ const Login = () => {
         dispatch(signInFailure(data.message))
         toast.error(res.data.message)
       }
-
+      setIsAuth(true);
+      localStorage.setItem('isAuth', 'true');
       toast.success(res.data.message)
       dispatch(signInSuccess(res.data))
        navigate("/")

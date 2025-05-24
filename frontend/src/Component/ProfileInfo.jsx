@@ -5,12 +5,17 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { storage, db } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { updateDoc, doc, getDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+// import { useContext } from "react";
+// import { ThemeContext } from "../contexts/theme";
 
 const ProfileInfo = ({ onLogout, userInfo }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [profileImageUrl, setProfileImageUrl] = useState(userInfo?.profileImageUrl || "");
   const dropdownRef = useRef(null);
+  const {isAuth} = useContext(ThemeContext);
+   const navigate = useNavigate();
 
   //Load profile image URL on initial load
   useEffect(()=>{
@@ -26,6 +31,9 @@ const ProfileInfo = ({ onLogout, userInfo }) => {
     fetchProfileImage();
   },[userInfo]);
 
+  const handleLogin=()=>{
+    navigate("/login");
+  }
 
   // Toggle dropdown
   const toggleDropdown = () => {
@@ -105,18 +113,21 @@ const handleImageUpload = async (e) => {
           } cursor-pointer w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full`}
           onClick={toggleDropdown}
         >
-          {profileImageUrl ? (
+        { isAuth ?profileImageUrl ? (
             <img src={profileImageUrl} alt="Profile" className="w-full h-full object-cover rounded-full" />
           ) : (
             getInitials(userInfo?.username)
-          )}
+          ): getInitials("Unknown") }
+
+          
         </div>
         <span
           className={`absolute -bottom-14 left-1/2 transform -translate-x-1/2 px-2 py-1 text-xs ${
             theme === "dark" ? "bg-gray-600 text-white border-white" : "bg-gray-200 text-gray-800 border-gray-900"
           } text-white rounded-md border border-white opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200`}
         >
-          <p className="text-sm font-medium">{userInfo?.username}</p>
+        { isAuth? <p className="text-sm font-medium">{userInfo?.username}</p>: <p className="text-sm font-medium">{"Unknown"}</p>}
+          
         </span>
       </div>
 
@@ -133,11 +144,13 @@ const handleImageUpload = async (e) => {
           <label className="block text-sm font-medium mb-2">Upload Profile Image:</label>
           <input type="file" onChange={handleImageUpload} className="text-xs text-gray-500" />
           <hr className="my-2" />
+
+          
           <button
             className="w-full text-left text-sm p-2 rounded-md border border-blue-600 text-blue-600 hover:bg-red-500 hover:text-white"
-            onClick={onLogout}
+            onClick={isAuth? onLogout: handleLogin}
           >
-            Logout
+            {isAuth? "Logout": "SignIn"}
           </button>
         </div>
       )}

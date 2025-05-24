@@ -13,7 +13,7 @@ import { IoMdClose } from 'react-icons/io';
 
 const Navbar = ({userInfo,onSearchNote,handleClearSearch}) => {
 
-    const {theme} = useContext(ThemeContext);
+    const {theme,isAuth} = useContext(ThemeContext);
     const [searchQuery,setSearchQuery]=useState("");
     const [isMobileSearchOpen,setIsMobileSearchOpen]=useState(false);
     const [isSidebarOpen,setIsSidebarOpen]= useState(false);
@@ -83,12 +83,22 @@ const Navbar = ({userInfo,onSearchNote,handleClearSearch}) => {
        </h2>
       </Link>
        
-       <Link to={"/imp_note"}>
-       <button className="text-sm bg-red-500 p-1  rounded-md text-white hover:opacity-80 hidden md:inline-block" >Favorite Notes</button>
-       </Link>
+        
+       
+       <button onClick={()=>{ 
+        if(isAuth)
+        {
+          navigate("/imp_note");
+        }
+        else{
+          navigate("/login");
+        }
+       }} className="text-sm bg-red-500 p-1  rounded-md text-white hover:opacity-80 hidden md:inline-block" >Favorite Notes</button>
+       
        </div>
 
         <div className="hidden md:flex flex-grow justify-center">
+
        <SearchBar value={searchQuery}
         onChange={({target})=>setSearchQuery(target.value)}
         handleSearch={handleSearch}

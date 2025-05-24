@@ -7,12 +7,13 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import  ThemeProvider  from './contexts/theme'; // Import ThemeProvider
 //import './App.css';
+import { ThemeContext } from './contexts/theme';
+import { useContext } from "react";
 
 
 
 export default function App() {
-
-
+const { isAuth } = useContext(ThemeContext);
   return (
     <>
       {/* Here setup for Browser Ruotes for move or iterate one pages to another */}
@@ -24,7 +25,7 @@ export default function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/signup" element={<Signup/>}/>
-          <Route path="/imp_note" element={<Imp_note/>}/>
+          <Route path="/imp_note" element={isAuth ? <Imp_note /> : <Login/> }/>
         </Routes>
         
         <ToastContainer position="top-center"/>

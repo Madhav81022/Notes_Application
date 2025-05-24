@@ -6,11 +6,16 @@ export const ThemeContext = createContext();
 
  const ThemeProvider = ({children}) => {
   const [theme, setTheme] = useState('light');
+  const [isAuth,setIsAuth]= useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     setTheme(savedTheme);
     document.documentElement.classList.add(savedTheme);
+
+     const savedAuth = localStorage.getItem('isAuth') === 'true';
+     setIsAuth(savedAuth);
+
     //document.body.className = savedTheme;
 
     // if(theme === "light"){
@@ -33,7 +38,7 @@ export const ThemeContext = createContext();
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme,isAuth, setIsAuth }}>
       {children}
     </ThemeContext.Provider>
   );
